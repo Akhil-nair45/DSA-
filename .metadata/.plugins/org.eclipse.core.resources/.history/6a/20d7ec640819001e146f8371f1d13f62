@@ -1,0 +1,16 @@
+package com.example.demo.Dto;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+public class EmployeeDTO {
+
+	
+	
+	private int eid;
+	private String employeename;
+	private String email;
+	private String password;
+}

@@ -1,0 +1,64 @@
+package com.example.demo.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.example.demo.Dto.AuthRequest;
+import com.example.demo.Model.Model;
+import com.example.demo.Service.JwtService;
+import com.example.demo.Service.ModelServiceImpl;
+
+@RestController
+public class ModelController {
+
+	@Autowired
+	private ModelServiceImpl serv;
+	
+	
+	@PostMapping("/addproduct")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<?> saveproduct(@RequestBody Model model){
+		return new ResponseEntity<>(serv.saveproduct(model), HttpStatus.CREATED);
+	}
+	
+	@GetMapping("/findAllProducts")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<?> getallproducts(){
+		return new ResponseEntity<>(serv.getallproducts(), HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getproductbyId(@PathVariable Integer id){
+		return new ResponseEntity<>(serv.getproductbyId(id), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/deleteproduct/{id}")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<?> deleteproduct(@PathVariable Integer id){
+		return new ResponseEntity<>(serv.deleteproduct(id), HttpStatus.OK);
+	}
+	
+	@GetMapping("/findproduct/{productName}")
+	public ResponseEntity<?> findproductByName(@PathVariable String productName){
+		return new ResponseEntity<>(serv.findByProductName(productName), HttpStatus.OK);
+	}
+	
+	@PutMapping("/editproduct")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public ResponseEntity<?> editproduct(@RequestBody Model model){
+		return new ResponseEntity<>(serv.saveproduct(model), HttpStatus.CREATED);
+	}
+	
+	
+	
+	
+}

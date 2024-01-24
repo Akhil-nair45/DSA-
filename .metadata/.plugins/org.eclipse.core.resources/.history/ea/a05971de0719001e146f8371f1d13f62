@@ -1,0 +1,14 @@
+package com.example.demo.Service;
+
+import com.example.demo.Model.Contact;
+
+public interface ContactService {
+
+	public Contact addContact(Contact c);
+	
+	public Contact editContact(Contact c);
+	
+	public Contact getContactById(Integer id);
+	
+	p
+}
